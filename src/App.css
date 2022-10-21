@@ -5,6 +5,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background: #141414;
+    color: #fff;
+}
+
 .lds-ellipsis {
     display: inline-block;
     position: relative;
@@ -63,27 +68,54 @@
 
 .chat {
     border-radius: 5px;
+    background: #222222;
+    padding: 10px;
+}
+
+.textField {
+    background: #222222;
+    border-radius: 5px;
+}
+
+.bar {
+    background: #222222;
 }
 
 .chat::-webkit-scrollbar {
-    width: 8px;               /* ширина scrollbar */
+    width: 8px;
 }
 .chat::-webkit-scrollbar-track {
-    background: rgba(255, 166, 0, 0);        /* цвет дорожки */
+    background: rgba(255, 166, 0, 0);
 }
 .chat::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 86, 206);    /* цвет плашки */
-    border-radius: 20px; /* padding вокруг плашки */
+    background-color: #4d4d4d;
+    border-radius: 20px;
+}
+
+.chat::-webkit-scrollbar-thumb:hover {
+    background-color: #606060;
 }
 
 .msgWrapper {
     display: flex;
+    padding: 5px 10px 0 15px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+.message {
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 10px;
 }
 
 .avatar {
     margin-right: 10px;
     width: 30px;
     border-radius: 50%;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
 }

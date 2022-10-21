@@ -10,14 +10,25 @@ const Navbar = () => {
     const [user] = useAuthState(auth)
 
     return (
-        <AppBar color={'info'} position="static">
+        <AppBar style={{background: '#222222'}} position="static">
             <Toolbar variant={'dense'}>
                 <Grid container justifyContent={'flex-end'}>
+                    {
+                        <div style={{
+                            fontFamily: 'Fuzzy Bubbles, cursive', 
+                            fontSize: '30px', 
+                            position: 'absolute', 
+                            left: 30, top: '50%', 
+                            transform: 'translateY(-50%)'
+                        }}>
+                            GigaChat
+                        </div>
+                    }
                     {user ? 
-                        <Button onClick={() => auth.signOut()} variant={'contained'}>Выйти</Button> 
+                        <Button onClick={() => auth.signOut()} variant={'outlined'}>Выйти</Button> 
                         :
                         <NavLink to={LOGIN_ROUTE}>
-                            <Button variant={'contained'}>Логин</Button>
+                            <Button variant={'outlined'}>Логин</Button>
                         </NavLink>
                         
                     }

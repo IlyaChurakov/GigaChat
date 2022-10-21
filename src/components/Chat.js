@@ -41,6 +41,20 @@ const Chat = () => {
         return <Loader/>
     }
 
+    const getDate = (message) => {
+        try {
+            let seconds = message.createdAt.seconds
+
+            let res = new Date(+seconds * 1000)
+            
+            let time = [res.getHours(), res.getMinutes()].map(function (x) {
+                return x < 10 ? "0" + x : x
+            }).join(":")
+
+            return time
+        } catch{}
+    }
+
     return (
         <Container>
             <Grid 
@@ -50,23 +64,28 @@ const Chat = () => {
             >
                 <div 
                     className='chat'
-                    style={{width: '80%', height: '70vh', border: '1px solid gray', overflowY: 'auto'}}
+                    style={{width: '80%', height: '70vh', overflowY: 'auto'}}
                     
                 >
                     {messages.map((message, i) =>
                         <div key={i} style={{
-                            margin: 10, 
-                            border: user.uid === message.uid ? '2px solid green' : '1px solid lightgray',
+                            margin: 5, 
+                            border: user.uid === message.uid ? '2px solid #1565C0' : '1px solid lightgray',
                             marginLeft: user.uid === message.uid ? 'auto' : '10px',
                             width: 'fit-content',
+                            maxWidth: '45%',
+                            wordWrap: 'break-word',
                             padding: 7,
                             borderRadius: 20
                         }}>
                             <div className='msgWrapper' container>
-                                <img src={message.photoURL} className="avatar"/>
-                                <div className='userName'>{message.displayName}</div>
+                                <div className='titleWrapper'>
+                                    <img src={message.photoURL} className="avatar"/>
+                                    <div className='userName'>{message.displayName}</div>
+                                </div>
+                                <div>&nbsp;{getDate(message)}</div>
                             </div>
-                            <div>{message.text}</div>
+                            <div className='message'>{message.text}</div>
                             
                         </div> 
                     )}
@@ -79,29 +98,29 @@ const Chat = () => {
                     style={{width: '80%'}}
                 >
                     <TextField
-                        fullWidth
-                        maxRows={2}
-                        variant={'outlined'}
+                        sx={{ input: { color: 'white' } }}
+                        className='textField'
                         value={value}
+                        autoComplete='off'
                         onChange={e => setValue(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key == 'Enter') {
                                 sendMessage()
                             }
                         }}
+                        style={{width: '85%', transform: 'translateX(-138px)'}}
                     >
                         
                     </TextField>
                     <Button 
-                            onClick={sendMessage}
-                            variant={'outlined'}
-                            style={{
-                                marginTop: 10,
-                                zIndex: 10
-                            }}    
-                        >
-                            Отправить
-                        </Button>
+                        onClick={sendMessage}
+                        variant={'outlined'}
+                        style={{
+                            transform: 'translate(-10px, -46px)'
+                        }}    
+                    >
+                        Отправить
+                    </Button>
                 </Grid>
             </Grid>
         </Container>
