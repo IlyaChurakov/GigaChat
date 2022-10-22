@@ -1,7 +1,7 @@
-import React, { useContext, useState, useRef, useEffect, getSnapshotBeforeUpdate } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { Context } from '..';
-import { Button, Grid, Box, TextField, Avatar } from '@mui/material'
+import { Button, Grid, TextField} from '@mui/material'
 import { Container } from '@mui/system';
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import Loader from './Loader';
@@ -104,7 +104,7 @@ const Chat = () => {
                         autoComplete='off'
                         onChange={e => setValue(e.target.value)}
                         onKeyDown={(e) => {
-                            if (e.key == 'Enter') {
+                            if (e.key === 'Enter') {
                                 sendMessage()
                             }
                         }}

@@ -8,14 +8,12 @@ import { Context } from '..';
 const AppRouter = () => {
     const {auth} = useContext(Context)
     const [user] = useAuthState(auth)
-
-    console.log(user)
+    const [{chat, users}] = privateRoutes
     return user ? 
         (
             <Switch>
-                {privateRoutes.map(({path, Component}) => 
-                    <Route path={path} key={path} component={Component} exact/>
-                )}
+                <Route path={chat.path} key={chat.path} component={chat.Component} exact/>
+                <Route path={users.path} key={users.path} component={users.Component} exact/>
                 <Redirect to={CHAT_ROUTE}/>
             </Switch>
         )

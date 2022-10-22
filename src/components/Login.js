@@ -1,16 +1,40 @@
 import React, { useContext } from 'react';
 import { Container } from '@mui/system';
-import { Toolbar, AppBar, Button, Grid, Box } from '@mui/material'
+import { Button, Grid, Box } from '@mui/material'
 import { Context } from '..';
-import { getAuth } from "firebase/auth";
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const Login = () => {
     const {firebase, auth} = useContext(Context)
+    const {firestore} = useContext(Context)
+    const [users] = useCollectionData(
+        firestore.collection('users')
+    )
 
     const login = async () => {
         const provider = new firebase.auth.GoogleAuthProvider()
         const {user} = await auth.signInWithPopup(provider)
-        console.log(user)
+
+        let userUid = user.uid
+
+        if (user.uid) {
+            firestore.collection('users').userUid.photoURL = userUid.photoURL
+        }
+
+        let userUids = []
+
+        users.forEach(item => {
+            userUids.push(item.uid)
+        })
+
+        if (userUids.includes(user.uid, 0) === false) {
+            firestore.collection('users').add({
+                uid: user.uid,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+        }
     }
 
     return (

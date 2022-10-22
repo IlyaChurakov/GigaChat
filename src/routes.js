@@ -1,6 +1,7 @@
-import { LOGIN_ROUTE, CHAT_ROUTE } from "./utils/consts";
+import { LOGIN_ROUTE, CHAT_ROUTE, USERS_ROUTE } from "./utils/consts";
 import Login from './components/Login'
 import Chat from './components/Chat'
+import Users from "./components/Users";
 
 export const publicRoutes = [
     {
@@ -11,7 +12,13 @@ export const publicRoutes = [
 
 export const privateRoutes = [
     {
-        path: CHAT_ROUTE,
-        Component: Chat
+        chat: {
+            path: CHAT_ROUTE,
+            Component: Chat
+        },
+        users: {
+            path: USERS_ROUTE,
+            Component: Users
+        }
     }
 ]
