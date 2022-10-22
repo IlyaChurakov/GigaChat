@@ -137,3 +137,17 @@ body {
     display: flex;
     margin: 10px;
 }
+
+.gridForTxtField {
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    max-width: 1000px;
+    transform: translateX(-50%);
+}

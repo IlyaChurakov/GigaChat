@@ -24,15 +24,17 @@ const Navbar = () => {
                             GigaChat
                         </div>
                     }
-                    {
-                        <NavLink to={CHAT_ROUTE}>
+                    {user ?
+                        <NavLink to={CHAT_ROUTE} style={{textDecoration: 'none'}}>
                             <Button style={{margin: '0 10px'}} variant={'outlined'}>Чат</Button>
                         </NavLink>
+                        :
+                        null
                     }
                     {user && user.uid == "PfMbKclV8CQlWU78ZidxCUF0Kbi2" 
                         ?
-                        <NavLink to={USERS_ROUTE}>
-                            <Button style={{margin: '0 10px'}} variant={'outlined'}>Пользователи</Button>
+                        <NavLink to={USERS_ROUTE} style={{textDecoration: 'none'}}>
+                            <Button style={{margin: '0 10px', textDecoration: 'none'}} variant={'outlined'}>Пользователи</Button>
                         </NavLink>
                         :
                         <div></div>
@@ -40,10 +42,7 @@ const Navbar = () => {
                     {user ? 
                         <Button style={{margin: '0 10px'}} onClick={() => auth.signOut()} variant={'outlined'}>Выйти</Button> 
                         :
-                        <NavLink to={LOGIN_ROUTE}>
-                            <Button style={{margin: '0 10px'}} variant={'outlined'}>Логин</Button>
-                        </NavLink>
-                        
+                        null
                     }
                 </Grid>
             </Toolbar>

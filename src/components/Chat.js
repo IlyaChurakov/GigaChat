@@ -56,10 +56,11 @@ const Chat = () => {
     }
 
     return (
-        <Container>
+        <Container >
             <Grid 
+                className="container"
                 container 
-                style={{height: window.innerHeight - 70, marginTop: 20}}
+                style={{height: window.innerHeight - 70 - 20, marginTop: 20}}
                 justifyContent={'center'}
             >
                 <div 
@@ -69,14 +70,14 @@ const Chat = () => {
                 >
                     {messages.map((message, i) =>
                         <div key={i} style={{
-                            margin: 5, 
-                            border: user.uid === message.uid ? '2px solid #1565C0' : '1px solid lightgray',
+                            margin: 5,
                             marginLeft: user.uid === message.uid ? 'auto' : '10px',
                             width: 'fit-content',
                             maxWidth: '45%',
                             wordWrap: 'break-word',
                             padding: 7,
-                            borderRadius: 20
+                            borderRadius: 20,
+                            background: user.uid === message.uid ? '#051E34' : '#39393D'
                         }}>
                             <div className='msgWrapper' container>
                                 <div className='titleWrapper'>
@@ -92,9 +93,7 @@ const Chat = () => {
                     <div ref={chatRef}></div>
                 </div>
                 <Grid
-                    container
-                    direction={'column'}
-                    alignItems={'flex-end'}
+                    className='gridForTxtField'
                     style={{width: '80%'}}
                 >
                     <TextField
@@ -102,13 +101,14 @@ const Chat = () => {
                         className='textField'
                         value={value}
                         autoComplete='off'
+                        placeholder='Напишите сообщение...'
                         onChange={e => setValue(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 sendMessage()
                             }
                         }}
-                        style={{width: '85%', transform: 'translateX(-138px)'}}
+                        style={{width: '80%', height: 56}}
                     >
                         
                     </TextField>
@@ -116,7 +116,8 @@ const Chat = () => {
                         onClick={sendMessage}
                         variant={'outlined'}
                         style={{
-                            transform: 'translate(-10px, -46px)'
+                            height: 56,
+                            width: '18%'
                         }}    
                     >
                         Отправить
